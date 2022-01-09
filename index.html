@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/12c34a5222.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="index.js" defer></script>
+    <title>SketchPad</title>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Sketch Pad</h1>
+    </div>
+    <div class="control_area">
+      <div class="control_button_container">
+        <button id="eraser">
+          <i class="fas fa-eraser"></i>
+          <p>Eraser</p>
+        </button>
+      </div>
+      <div class="control_button_container">
+        <button id="pen">
+          <i class="fas fa-pen"></i>
+          <p>Pen</p>
+        </button>
+      </div>
+      <div class="control_button_container">
+        <button id="undo">
+          <i class="fas fa-undo"></i>
+          <p>Undo</p>
+        </button>
+      </div>
+      <div class="control_button_container">
+        <button id="reset">
+          <i class="fas fa-sync"></i>
+          <p>Reset</p>
+        </button>
+      </div>
+      <div class="control_button_container">
+        <button id="save">
+          <i class="fas fa-save"></i>
+          <p>Save</p>
+        </button>
+      </div>
+    </div>
+
+    <div class="pop_up_container">
+      <!-- <button id="close_button">
+        <i class="fas fa-times"></i>
+        <p>Close</p>
+      </button> -->
+      <div class="pop_up" id="eraser_pop_up">
+        <h3>Eraser Settings</h3>
+        <div class="slider_container">
+          <input
+            type="range"
+            min="24"
+            max="48"
+            step="12"
+            value="24"
+            class="slider"
+            id="eraser_slider"
+          />
+        </div>
+        <div>Eraser size: <span id="eraser_size"></span></div>
+      </div>
+      <div class="pop_up" id="pen_pop_up">
+        <h3>Pen Settings</h3>
+        <div class="slider_container">
+          <input
+            type="range"
+            min="1"
+            max="10"
+            step="1"
+            value="1"
+            class="slider"
+            id="pen_slider"
+          />
+        </div>
+        <div>Stroke size: <span id="pen_size"></span></div>
+        <div>
+          Stroke colour:
+          <span id="pen_color_container">
+            <input type="color" id="pen_color" value="#000000" />
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sketch_area_container">
+      <canvas id="sketch_area"> </canvas>
+    </div>
+  </body>
+</html>
