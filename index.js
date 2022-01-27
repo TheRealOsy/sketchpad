@@ -40,8 +40,8 @@ penColorContainer.style.backgroundColor = penColor;
 let eraserSize = eraserSlider.value;
 let penSize = penSlider.value;
 
-eraserSizeDisplay.innerHTML = eraserSize;
-penSizeDisplay.innerHTML = penSize;
+eraserSizeDisplay.textContent = eraserSize;
+penSizeDisplay.textContent = penSize;
 
 const scaleX = 0.5;
 const scaleY = 0.5;
@@ -55,6 +55,9 @@ let sketchStart,
 setCanvasDimensions();
 fillCanvas();
 setEventListeners();
+disableUndo();
+disableReset();
+disableSave();
 // console.log(deviceType);
 
 let prevCoords = [0, 0];
@@ -94,6 +97,7 @@ penButton.onclick = (e) => {
 undoButton.onclick = (e) => {
   restoreCanvasState(prevCanvasState);
   saveCurrentCanvasState();
+  disableUndo();
 };
 
 resetButton.onclick = (e) => {
@@ -101,6 +105,9 @@ resetButton.onclick = (e) => {
   fillCanvas();
   saveCurrentCanvasState();
   savePreviousCanvasState();
+  disableUndo();
+  disableReset();
+  disableSave();
 };
 
 saveButton.onclick = (e) => {
@@ -140,11 +147,11 @@ penColorInput.onchange = (e) => {
 
 sketchArea.addEventListener(sketchStart, (e) => {
   if (!isDrawing) {
-    // console.log(e);
     isDrawing = true;
     savePreviousCanvasState();
     sketch.beginPath();
     sketch.lineWidth = penSize;
+    enableButtons();
     restoreCanvasState(currentCanvasState);
     prevCoords = getCoords(e);
   }
@@ -227,7 +234,18 @@ function fillCanvas() {
 function setLineType(selectedLine) {
   // console.log(selectedLine);
   lineType = selectedLine;
+  setButtonStyle(selectedLine);
   if (deviceType != MOBILE) setCursor(selectedLine);
+}
+
+function setButtonStyle(selectedLine) {
+  if (selectedLine === ERASER) {
+    eraserButton.classList.add("selected");
+    penButton.classList.remove("selected");
+  } else if (selectedLine === PEN) {
+    penButton.classList.add("selected");
+    eraserButton.classList.remove("selected");
+  }
 }
 
 function setCursor(selectedLine) {
@@ -331,4 +349,22 @@ function hidePopups() {
   eraserPopup.style.display = none;
   penPopup.style.display = none;
   popupContainer.style.display = none;
+}
+
+function disableUndo() {
+  undoButton.classList.add("disabled");
+}
+
+function disableReset() {
+  resetButton.classList.add("disabled");
+}
+
+function disableSave() {
+  saveButton.classList.add("disabled");
+}
+
+function enableButtons() {
+  undoButton.classList.remove("disabled");
+  resetButton.classList.remove("disabled");
+  saveButton.classList.remove("disabled");
 }

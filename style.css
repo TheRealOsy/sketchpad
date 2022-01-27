@@ -63,9 +63,8 @@ body {
 
 .control_area button {
   border-radius: 100%;
-  border: none;
   background: white;
-  border: solid rgb(194, 194, 194) 1px;
+  border: solid #c2c2c2 1px;
 }
 
 .control_area button p {
@@ -143,6 +142,16 @@ input[type="color"] {
   border: none;
 }
 
+.control_area .selected {
+  background: #d2ebe0;
+  box-shadow: 0 0 1em #c2ddd0;
+  border: none;
+}
+.control_area .disabled {
+  background: #c9c9c9;
+  opacity: 0.5;
+}
+
 @media only screen and (max-width: 768px) {
   .control_area button {
     width: 50px;
@@ -166,5 +175,9 @@ input[type="color"] {
 
   .control_area button:hover {
     box-shadow: 0 0 1em #37a9ccd7;
+  }
+
+  .control_area .disabled:hover {
+    box-shadow: none;
   }
 }
